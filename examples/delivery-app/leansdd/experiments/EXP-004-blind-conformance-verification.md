@@ -195,39 +195,59 @@ Was any additional guidance required?
 
 ## 12. Result
 
-Complete after execution.
+## 12. Result
 
 ### Artifacts discovered
 
-TBD
+The verifier inspected the behavioural specification, constitution,
+Engineering Context, implementation, tests, and evidence artifact.
 
 ### Behavioural conformance
 
-TBD
+Conformant.
+
+The verifier correctly identified that the implementation satisfies the
+principal behaviours of SPEC-001.
 
 ### Engineering-context conformance
 
-TBD
+The verifier reported conformance.
+
+However, this finding is contradicted by repository evidence.
+
+Engineering Context explicitly establishes Kotlin and Spring Boot as
+the backend implementation environment, while the implementation under
+verification is Node.js/CommonJS.
+
+The verifier therefore failed to identify a material Engineering
+Context deviation.
 
 ### Conflicts discovered
 
-TBD
+The material backend technology conflict was not discovered.
 
 ### Evidence assessment
 
-TBD
+The verifier relied substantially on the passing six-test suite and
+existing evidence artifact.
+
+Those artifacts verify important behavioural and provider-boundary
+properties but do not verify the backend technology constraint.
 
 ### Scope assessment
 
-TBD
+Conformant.
+
+No material functionality outside SPEC-001 was identified.
 
 ### False findings
 
-TBD
+The verifier incorrectly reported Engineering Context conformance and,
+as a consequence, overall conformance.
 
 ### Human intervention
 
-TBD
+None during verification.
 
 ---
 
@@ -254,17 +274,37 @@ required human guidance to discover the conflict.
 
 ## 14. Learning
 
-Complete after execution.
+### LEARNING-012 — Governing artifacts need normative semantics
 
-Questions include:
+The presence of Engineering Context is insufficient if agents cannot
+determine which statements are mandatory constraints and which are
+guidance.
 
-- Can independent verification reliably challenge implementation?
-- Are governing artifacts sufficiently discoverable?
-- Is Engineering Context enforceable through verification?
-- Are existing evidence artifacts sufficiently trustworthy?
-- What information should a verifier be allowed to inspect?
-- Should historical experiment evidence be excluded from normal
-  conformance verification?
+Lean-SDD needs explicit normative language for engineering constraints.
+
+### LEARNING-013 — Context and constraints are not equivalent
+
+Descriptive project context helps an agent understand the environment.
+
+A constraint establishes something an implementation must satisfy.
+
+Lean-SDD should distinguish these concepts explicitly.
+
+### LEARNING-014 — Verification requires derived checks
+
+The verifier recognized tests as evidence but did not derive a check
+for the backend technology constraint.
+
+Governing constraints should be capable of producing explicit
+verification obligations.
+
+### LEARNING-015 — Independent verification is necessary but not sufficient
+
+Agent independence removed contamination from previous experiment
+findings but did not guarantee correct conformance evaluation.
+
+Verification needs both independence and explicit, verifiable
+governing constraints.
 
 ---
 
