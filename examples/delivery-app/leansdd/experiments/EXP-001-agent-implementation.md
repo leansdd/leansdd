@@ -1,6 +1,6 @@
 # EXP-001 — Agent Implementation from a Lean-SDD Specification
 
-**Status:** Planned  
+**Status:** Completed  
 **Spec under test:** SPEC-001 — Precise Delivery Location  
 **Experiment type:** Protocol validation  
 **Framework version:** Lean-SDD v0.1
@@ -233,7 +233,80 @@ Possible categories:
 
 ## 10. Result
 
-Complete after execution.
+### Clarifications requested
+
+None.
+
+The agent implemented SPEC-001 without requesting additional product
+requirement clarification.
+
+### Behaviour implemented
+
+- Valid location resolution to coordinates.
+- Resolved location held as pending until customer confirmation.
+- Unresolved input prevented from becoming a confirmed destination.
+- Confirmed coordinates exposed through the driver-facing contract.
+- what3words isolated behind the LocationResolver abstraction.
+
+### Behaviour missed or incorrectly interpreted
+
+No material specified behaviour was omitted.
+
+The implementation introduced some ambiguity in the semantics of the
+`source` field, indicating that provider provenance and location state
+could be specified more explicitly.
+
+### Functionality implemented outside the slice
+
+None observed.
+
+The agent did not introduce dispatch optimisation, route planning,
+arrival detection, proof of delivery, access instructions, or other
+adjacent delivery functionality.
+
+### Architecture constraints violated
+
+No material violation observed.
+
+However, the agent selected Node.js/CommonJS as the implementation
+environment because the experiment did not provide an explicit
+implementation substrate.
+
+This was a reasonable inference but was not determined by SPEC-001.
+
+### Verification evidence produced
+
+Six automated tests were produced and executed successfully.
+
+Result:
+
+- 6 passed
+- 0 failed
+
+The tests covered:
+
+- provider resolution;
+- confirmation gating;
+- unresolved input;
+- driver-facing destination;
+- provider abstraction;
+- domain/provider dependency separation.
+
+Some architecture verification relied on source-text inspection and
+should therefore be considered weaker evidence than structural or
+contract-based verification.
+
+### Human intervention required
+
+None during implementation.
+
+### Human rework required
+
+No human rework was required to execute the implemented slice and its
+tests.
+
+Further refinement would be required before treating the implementation
+as a production delivery application.
 
 ### Clarifications requested
 
@@ -280,8 +353,23 @@ The agent implemented the selected behaviour without additional
 requirement clarification and produced sufficient verification evidence.
 
 **Partially supported**  
-The agent implemented the slice but exposed gaps or ambiguities in the
-specification or protocol.
+The agent implemented the selected vertical slice without additional
+human requirement clarification, remained within the intended scope,
+respected the principal provider abstraction, and produced executable
+verification evidence.
+
+The experiment also exposed two protocol gaps:
+
+1. The specification did not establish the intended implementation
+   environment, requiring the agent to infer one.
+
+2. The existence of automated tests did not by itself establish the
+   sufficiency or strength of verification evidence.
+
+The experiment therefore supports the hypothesis that Lean-SDD can
+provide sufficient behavioural context for autonomous implementation,
+while identifying areas where engineering context and evidence
+traceability require further development.
 
 **Not supported**  
 The agent could not implement the slice without material additional
@@ -293,38 +381,74 @@ The outcome should be supported by the recorded evidence.
 
 ## 12. Learning
 
-This section is intentionally empty before execution.
+### LEARNING-001 — Minimum sufficient specification can work
 
-After the experiment, capture what was learned about:
+SPEC-001 contained enough behavioural information for an AI coding
+agent to implement the intended vertical slice without additional
+requirement clarification.
 
-- the Lean-SDD specification format;
-- minimum sufficient specification;
-- agent instructions;
-- architecture context;
-- evidence requirements;
-- slice boundaries;
-- missing protocol concepts.
+### LEARNING-002 — Engineering context is distinct from product behaviour
 
-Do not change the protocol while the experiment is running.
+The agent correctly derived what the system should do but had to infer
+the implementation environment.
+
+Lean-SDD needs an explicit mechanism for project-wide engineering
+context and constraints without polluting individual behavioural
+specifications with implementation detail.
+
+### LEARNING-003 — Evidence presence is not evidence sufficiency
+
+The agent produced executable automated tests and all tests passed.
+
+However, some evidence was stronger than others. In particular,
+source-text inspection was used as an architecture check.
+
+Lean-SDD should distinguish between the existence of verification
+evidence and whether that evidence is sufficiently strong to support
+the specified behaviour or constraint.
+
+### LEARNING-004 — Specification and evidence should remain separate
+
+The agent updated the dedicated evidence artifact rather than modifying
+SPEC-001.
+
+This separation worked well and should remain a Lean-SDD principle:
+
+Specification defines what must be true.
+Evidence demonstrates whether it is true.
 
 ---
 
 ## 13. Candidate Evolution
 
-Complete only after the Learning section.
+The following changes are candidates for a future Lean-SDD iteration
+and are not part of EXP-001 itself.
 
-Potential changes may affect:
+### Engineering Context
 
-- specification templates;
-- Lean-SDD principles;
-- agent contracts;
-- project constitution;
-- CLI behaviour;
-- evidence model;
-- documentation.
+Investigate a first-class artifact for project-wide engineering
+constraints and implementation context.
 
-Every proposed change should trace back to an observation from this
-experiment.
+Questions include:
+
+- What belongs in engineering context versus a specification?
+- Which decisions should constrain agents?
+- Which decisions should agents remain free to make?
+- How should architecture decisions be represented?
+
+### Evidence Traceability
+
+Investigate stronger traceability between:
+
+Spec behaviour → verification requirement → executable evidence → result
+
+Evidence should identify the artifact and command that produced the
+result rather than relying only on checked verification items.
+
+### Evidence Sufficiency
+
+Investigate how Lean-SDD can describe required evidence strength
+without creating heavyweight governance or excessive specification.
 
 ---
 
