@@ -6,6 +6,7 @@
 - [x] Invalid-address negative test
 - [x] Driver contract test
 - [x] Provider-boundary architecture check
+- [x] Executed `node --test examples/delivery-app/tests/spec-001.test.js` with exit code 0
 
 ## Production
 Not yet deployed. Baseline and post-release observations are intentionally blank.

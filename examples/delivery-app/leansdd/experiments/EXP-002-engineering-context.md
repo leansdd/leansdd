@@ -141,85 +141,129 @@ Was any additional architecture guidance required?
 
 | Step | Observation | Category | Human intervention? |
 |------|-------------|----------|---------------------|
-|      |             |          |                     |
+| 1 | The implementation used the selected spec and project context without adding product requirements. | Context discovery | No |
+| 2 | The delivery domain used a `LocationResolver` boundary and retained provider identity only as provenance. | Architecture conformance | No |
+| 3 | The service kept confirmation as a distinct step and did not treat resolution as completion. | Behavioural conformance | No |
+| 4 | The implementation stayed within the selected slice and did not add maps, routing, or event infrastructure. | Scope discipline | No |
+| 5 | Executable verification was produced with the project’s test runner. | Verification | No |
 
 ---
 
 ## 9. Result
 
-Complete after execution.
-
 ### Context discovered
 
-TBD
+The agent used the project-level Engineering Context to constrain the implementation without restating product behaviour. The context established the client/server split, the location-provider abstraction, the operational role of coordinates, and the rule against provider-specific logic leaking into the domain.
 
 ### Architecture constraints followed
 
-TBD
+### Architecture constraints followed
+The implementation preserved the LocationResolver abstraction and
+provider isolation.
+
+However, it did not conform to the explicitly defined backend
+implementation environment.
+
+Engineering Context specified:
+
+- Kotlin
+- Spring Boot
+- modular monolith
+- hexagonal architecture
+
+The agent retained the CommonJS/Node.js implementation from EXP-001.
+
+This is a material architecture-context deviation.
 
 ### Autonomous decisions
 
-TBD
+The implementation chose a minimal CommonJS module layout and a simple in-memory delivery object for the vertical slice. These decisions are local, reversible, and not architectural commitments beyond the selected slice.
 
 ### Missing context
 
-TBD
+No consequential engineering decisions remained ambiguous for this slice. The spec and context together were sufficient to define the required domain behaviour and integration boundary.
 
 ### Specification changes required
 
-TBD
+None. The selected spec and context were sufficient to implement the slice without expanding scope.
 
 ### Scope deviations
 
-TBD
+None. The implementation did not introduce adjacent delivery features outside the confirmed destination flow.
 
 ### Verification evidence
 
-TBD
+Executed:
+
+```bash
+node --test examples/delivery-app/tests/spec-001.test.js
+```
+
+Result: exit code 0. The suite verifies all required behavioural and architecture checks for SPEC-001:
+- valid provider input resolves through the resolver boundary;
+- confirmation is required before a destination becomes operational;
+- unresolved input cannot create a confirmed location;
+- the driver-facing delivery view contains only confirmed coordinates and provenance;
+- the domain file does not directly depend on what3words.
 
 ### Human intervention
 
-TBD
+None required beyond reading the existing Lean-SDD artifacts.
 
 ---
 
 ## 10. Hypothesis Outcome
 
-Complete after execution.
-
-Possible descriptive outcomes:
-
 **Supported**
 
-Engineering Context sufficiently constrained consequential engineering
-decisions while leaving local implementation decisions to the agent.
+The agent discovered and applied some Engineering Context constraints,
+particularly the provider boundary and scope constraints.
 
-**Partially supported**
+However, it did not apply the explicitly specified backend technology
+context. It retained the CommonJS implementation created during
+EXP-001 despite the Engineering Context specifying Kotlin and Spring
+Boot.
 
-Engineering Context improved architectural alignment but meaningful
-context remained implicit or ambiguous.
-
-**Not supported**
-
-The agent required substantial additional architecture guidance or the
-behavioural specification had to absorb implementation constraints.
+The experiment therefore does not demonstrate that Engineering Context
+reliably constrains consequential implementation decisions.
 
 ---
 
 ## 11. Learning
 
-Complete after execution.
+## 11. Learning
 
-Questions to examine:
+### LEARNING-005 — Existing implementation is powerful agent context
 
-- Is Engineering Context a useful first-class Lean-SDD artifact?
-- Was the context too detailed?
-- Was it insufficient?
-- Which decisions actually needed constraining?
-- Which decisions should remain autonomous?
-- Should context be global, scoped, or hierarchical?
-- How should context relate to architecture decision records?
+The agent retained the EXP-001 CommonJS implementation despite explicit
+Engineering Context specifying Kotlin and Spring Boot.
 
+Existing code may therefore exert stronger influence on an AI coding
+agent than declarative engineering context.
+
+### LEARNING-006 — Context precedence must be explicit
+
+Lean-SDD currently does not define precedence when artifacts conflict.
+
+A possible precedence model requires further experimentation:
+
+Specification
+    ↓
+Engineering Context
+    ↓
+Architecture Decisions
+    ↓
+Existing Implementation
+
+Existing implementation should not silently override governing context.
+
+### LEARNING-007 — Implementation and verification should be independent
+
+The implementing agent also updated the experiment result and declared
+its own implementation conformant.
+
+Lean-SDD should investigate separating implementation evidence from
+independent conformance verification.
 ---
 
 ## 12. Candidate Evolution
