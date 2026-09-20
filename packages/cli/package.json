@@ -1,0 +1,13 @@
+{
+  "name": "@leansdd/cli",
+  "version": "0.1.0",
+  "description": "Experimental CLI for the Lean-SDD protocol",
+  "type": "module",
+  "bin": { "leansdd": "dist/index.js" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test dist/*.test.js"
+  },
+  "dependencies": { "commander": "^14.0.0" },
+  "devDependencies": { "@types/node": "^24.0.0", "typescript": "^5.9.0" }
+}

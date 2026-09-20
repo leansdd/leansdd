@@ -1,0 +1,10 @@
+{
+  "name": "leansdd-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "npm run build -w @leansdd/cli",
+    "test": "npm run test -w @leansdd/cli"
+  }
+}

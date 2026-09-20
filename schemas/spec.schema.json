@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leansdd.dev/schema/spec.schema.json",
+  "title": "Lean-SDD Spec Metadata",
+  "type": "object",
+  "required": ["id", "title", "status", "slice"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^SPEC-[0-9]{3,}$" },
+    "title": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "ready", "implementing", "verifying", "observing", "evolving", "retired"] },
+    "slice": { "type": "string", "pattern": "^SLICE-[0-9]{3,}$" }
+  },
+  "additionalProperties": true
+}
