@@ -1,39 +1,42 @@
----
-id: SPEC-XXX
-title: <title>
-status: draft
-slice: SLICE-XXX
----
+# <SPEC-ID> — <Title>
 
 ## Intent
-<Why should this exist?>
 
-## Outcome
-<What result should improve?>
+<Why should this capability exist?>
+
+## Expected Outcome
+
+<What observable result should improve?>
 
 ## Behaviour
 
-### Scenario: <name>
-GIVEN <context>
-WHEN <event/action>
-THEN <observable result>
+<What must be true?>
 
-## Constraints
-- <constraint>
+## Scenarios
 
-## Slice
-### Included
-- <behaviour included now>
+### Scenario 1 — <Name>
 
-### Deferred
-- <explicitly excluded adjacent behaviour>
+**Given** <state>  
+**When** <action/event>  
+**Then** <observable result>
 
-## Evidence
-### Verification
-- <test/contract/policy evidence>
+## Behavioural Boundaries
 
-### Production
-- <telemetry or user/operational signal>
+- <domain or behavioural rule>
 
-## Open Questions
-- <unresolved uncertainty>
+## Selected Slice
+
+<Smallest end-to-end behaviour worth implementing and learning from.>
+
+## Out of Scope
+
+- <deferred capability>
+
+## Verification Expectations
+
+- <behavioural evidence required>
+- <contract/integration evidence if applicable>
+
+## Production Measures
+
+- <signal or metric>
