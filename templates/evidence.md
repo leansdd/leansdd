@@ -82,7 +82,7 @@ For each conformance claim, determine whether the evidence is:
 | Behavioural Conformance | PASS / FAIL |
 | Engineering Conformance | PASS / FAIL |
 | Scope Conformance | PASS / FAIL |
-| Evidence Sufficiency | PASS / FAIL / INCOMPLETE |
+| Evidence Sufficiency | PASS / FAIL / UNKNOWN |
 
 ### Mandatory Constraint Failures
 
@@ -90,7 +90,7 @@ For each conformance claim, determine whether the evidence is:
 
 ### Overall Conformance
 
-**CONFORMANT | PARTIALLY CONFORMANT | NON-CONFORMANT**
+**CONFORMANT | NON-CONFORMANT | UNDETERMINED**
 
 ### Rationale
 
