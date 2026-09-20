@@ -1,22 +1,63 @@
-# Concepts
+# Lean-SDD Concepts
+
+Lean-SDD separates the artifacts and activities required to move from
+intent to evidence without turning specification into a large batch of
+up-front work.
+
+---
 
 ## Intent
-The problem, affected actor, desired outcome, and important uncertainty. Intent answers **why**.
+
+Intent explains why a behaviour is worth building.
+
+It describes the desired outcome or problem being addressed.
+
+Intent should be stable enough to guide decisions but small enough to
+evolve when evidence changes what is understood.
+
+---
 
 ## Specification
-Observable behaviour, rules, constraints, and required evidence. A spec answers **what must be true**.
 
-## Slice
-The smallest end-to-end behaviour selected for implementation and learning. A slice is not a component task list.
+A specification defines what must be true.
 
-## Evidence
-Two forms are distinguished:
+It describes observable behaviour, constraints on behaviour, scenarios,
+acceptance conditions, and relevant evidence expectations.
 
-- **Verification evidence**: tests, contracts, policies, checks, and other proof that implementation conforms to the spec.
-- **Production evidence**: telemetry or user/operational evidence used to validate whether the intended outcome occurred.
+A specification should avoid repeating project-wide engineering
+constraints already governed elsewhere.
 
-## Learning
-A recorded change in understanding caused by evidence. Learning may evolve a spec, create a new slice, invalidate an assumption, or leave the current model unchanged.
+---
 
-## WIP
-Specifications and implementation are both inventory while unfinished. Teams should set explicit WIP limits appropriate to their context.
+## Engineering Context
+
+Engineering Context defines the project-level boundaries within which
+specifications are implemented.
+
+Examples include:
+
+- architecture;
+- technology;
+- security;
+- integration;
+- interoperability;
+- operational constraints.
+
+Engineering Context may contain both descriptive information and
+normative constraints.
+
+Normative constraints use explicit language such as MUST, MUST NOT,
+SHOULD, SHOULD NOT, and MAY.
+
+---
+
+## Governing Constraint
+
+A governing constraint establishes an implementation condition against
+which conformance can be evaluated.
+
+Example:
+
+```text
+ENG-001
+Backend implementation MUST use Kotlin.

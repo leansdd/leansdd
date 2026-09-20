@@ -4,7 +4,7 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const program = new Command();
-program.name('leansdd').description('Lean-SDD protocol CLI').version('0.1.0');
+program.name('leansdd').description('Lean-SDD protocol CLI').version('0.2.0');
 
 const root = (project: string) => path.resolve(project, 'leansdd');
 
