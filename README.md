@@ -10,7 +10,11 @@ Lean-SDD treats specifications as first-class engineering artifacts—but also a
 
 ## Why Lean-SDD?
 
-AI can make implementation dramatically faster. That increases the cost of unclear intent: an agent can build the wrong thing faster than a human team ever could. Lean-SDD gives humans and agents a compact contract for intent, behaviour, constraints, evidence, and learning without turning specification into Big Design Up Front.
+Modern software delivery can produce code faster than teams can validate whether they are building the right thing. AI accelerates this further: unclear intent can become incorrect software at unprecedented speed.
+
+Lean-SDD addresses this by treating specification as a flow problem. It gives humans and agents a compact contract for intent, behaviour, constraints and evidence, while Lean principles limit specification inventory, batch size and work in progress.
+
+The goal is not more specification. The goal is faster validated learning.
 
 ## Core ideas
 
