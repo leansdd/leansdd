@@ -285,9 +285,38 @@ Complete after execution.
 
 ### Supported
 
-The blind verifier independently discovered applicable normative
-constraints, detected material deviations, and incorporated those
-results correctly into overall conformance.
+The blind verifier independently discovered the normative Engineering
+Context constraints and evaluated the applicable mandatory constraints
+individually without access to prior experiment findings.
+
+The verifier identified three material engineering-conformance
+failures:
+
+- ENG-001 — Backend Language: FAIL
+- ENG-002 — Backend Framework: FAIL
+- ENG-003 — Deployment Architecture: FAIL
+
+It also correctly identified the mandatory constraints satisfied by the
+implementation:
+
+- ENG-004 — Provider Isolation: PASS
+- ENG-005 — Canonical Location: PASS
+- ENG-007 — Messaging Infrastructure: PASS
+- ENG-008 — Navigation: PASS
+
+The verifier separately determined:
+
+- Behavioural Conformance: PASS
+- Engineering Conformance: FAIL
+- Scope Conformance: PASS
+- Evidence Sufficiency: PASS
+- Overall Conformance: NON-CONFORMANT
+
+No human hints about the known implementation deviations were required.
+
+Compared with EXP-004, explicit normative constraints materially
+improved the verifier's ability to derive and evaluate engineering
+verification obligations.
 
 ### Partially supported
 
@@ -303,34 +332,66 @@ normative constraints or required human guidance to do so.
 
 ## 14. Learning
 
-Complete after execution.
+### LEARNING-016 — Normative constraints improve verification
 
-Questions include:
+Representing consequential engineering decisions as identifiable
+MUST/MUST NOT constraints enabled the verifier to evaluate them
+individually rather than treating Engineering Context as descriptive
+guidance.
 
-- Did normative language improve verification?
-- Were stable constraint IDs useful?
-- Was verification guidance sufficient?
-- Were any constraints ambiguous about applicability?
-- Did MUST/MUST NOT semantics behave as intended?
-- Should SHOULD deviations affect overall conformance?
-- Can verification obligations be generated systematically from
-  constraints?
-- Is machine-readable constraint representation necessary?
+### LEARNING-017 — Stable constraint IDs improve traceability
+
+Constraint identifiers such as ENG-001 allowed verification findings
+to reference the exact governing requirement being evaluated.
+
+This creates a traceable relationship:
+
+Constraint → Expected → Observed → Evidence → Result
+
+### LEARNING-018 — Verification guidance helps derive obligations
+
+The verification guidance attached to constraints gave the verifier a
+basis for inspecting source structure, dependencies, architecture, and
+scope.
+
+### LEARNING-019 — Behavioural correctness and overall conformance are
+distinct
+
+SPEC-001 was behaviourally conformant while the implementation was
+non-conformant overall because mandatory engineering constraints failed.
+
+This validates multidimensional conformance reporting as a useful
+Lean-SDD concept.
+
+### LEARNING-020 — Normative constraints address the EXP-004 failure
+
+EXP-004's blind verifier incorrectly declared the same implementation
+conformant when Engineering Context was primarily descriptive.
+
+With the implementation and behavioural specification unchanged,
+EXP-005's verifier detected the material engineering deviations after
+Engineering Context was expressed as explicit normative constraints.
+
+This supports adopting normative Engineering Context in Lean-SDD v0.2.
 
 ---
 
 ## 15. Candidate Evolution
 
-Complete after reviewing evidence.
+EXP-005 provides evidence supporting adoption of the following concepts
+into Lean-SDD v0.2:
 
-Potential changes include:
+- Engineering Context as a first-class artifact;
+- identifiable ENG-* constraints;
+- MUST/MUST NOT/SHOULD/MAY normative semantics;
+- verification guidance attached to governing constraints;
+- multidimensional conformance reporting;
+- traceability from constraint to evidence;
+- independent verification where implementation bias creates material
+  risk.
 
-- formal adoption of normative Engineering Context;
-- constraint schemas;
-- automated verification-obligation generation;
-- CLI conformance support;
-- evidence provenance;
-- constraint applicability rules.
+Machine-readable constraints and automated verification-obligation
+generation remain future hypotheses and are not required for v0.2.
 
 ---
 
